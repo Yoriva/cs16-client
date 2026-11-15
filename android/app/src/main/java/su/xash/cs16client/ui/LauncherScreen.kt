@@ -23,13 +23,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.CheckCircle
-import androidx.compose.material.icons.rounded.Download
-import androidx.compose.material.icons.rounded.Launch
-import androidx.compose.material.icons.rounded.Lock
-import androidx.compose.material.icons.rounded.SportsEsports
-import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -45,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -129,7 +123,7 @@ private fun Header(title: String, subtitle: String, version: String) {
             contentAlignment = Alignment.Center,
         ) {
             Icon(
-                imageVector = Icons.Rounded.SportsEsports,
+                painter = painterResource(R.drawable.ic_gamepad),
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier.size(28.dp),
@@ -191,7 +185,7 @@ private fun HeroCard(
                     contentAlignment = Alignment.Center,
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.SportsEsports,
+                        painter = painterResource(R.drawable.ic_gamepad),
                         contentDescription = null,
                         tint = scheme.onPrimaryContainer,
                         modifier = Modifier.size(22.dp),
@@ -224,7 +218,7 @@ private fun HeroCard(
                 ),
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.Launch,
+                    painter = painterResource(R.drawable.ic_launch),
                     contentDescription = null,
                     modifier = Modifier.size(18.dp),
                 )
@@ -313,7 +307,7 @@ private fun DllCard() {
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.Lock,
+                    painter = painterResource(R.drawable.ic_lock),
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onTertiaryContainer,
                     modifier = Modifier.size(18.dp),
@@ -357,7 +351,7 @@ private fun WarningCard() {
     ) {
         Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.Top) {
             Icon(
-                imageVector = Icons.Rounded.Warning,
+                painter = painterResource(R.drawable.ic_warning),
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onErrorContainer,
                 modifier = Modifier.size(20.dp),
@@ -397,7 +391,7 @@ private fun EngineCard(enginePackage: String?, onGetEngine: () -> Unit) {
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
-                    imageVector = if (installed) Icons.Rounded.CheckCircle else Icons.Rounded.Download,
+                    painter = painterResource(if (installed) R.drawable.ic_check_circle else R.drawable.ic_download),
                     contentDescription = null,
                     tint = if (installed) scheme.onPrimaryContainer else scheme.onErrorContainer,
                     modifier = Modifier.size(20.dp),
