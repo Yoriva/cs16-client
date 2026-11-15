@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CS16Client</string>
+
+    <string name="launcher_title_cz">CSCZClient</string>
+    <string name="launcher_subtitle_cs">Counter-Strike 1.6</string>
+    <string name="launcher_subtitle_cz">Counter-Strike: Condition Zero</string>
+
+    <string name="launcher_hero_title">Ready when you are</string>
+    <string name="launcher_gamedir_value">game dir · %1$s</string>
+    <string name="launcher_launch">Launch game</string>
+
+    <string name="launcher_arguments">Launch arguments</string>
+    <string name="launcher_argv_label">Arguments</string>
+    <string name="launcher_argv_default">-dev 2 -log</string>
+    <string name="launcher_dll_label">GameDLL loader</string>
+    <string name="launcher_dll_value">-dll @metamod</string>
+    <string name="launcher_locked">Locked</string>
+    <string name="launcher_dll_warning">The launcher already loads metamod. Remove -dll from the arguments so two loaders do not compete for the same DLL list.</string>
+
+    <string name="launcher_status_blocked">Remove -dll from the arguments to continue.</string>
+
+    <string name="launcher_engine">Engine</string>
+    <string name="launcher_engine_missing">Not installed</string>
+    <string name="launcher_engine_missing_hint">Install the engine to launch the game.</string>
+    <string name="launcher_get_engine">Get engine</string>
+    <string name="launcher_footer">Arguments are saved automatically between launches.</string>
 </resources>
