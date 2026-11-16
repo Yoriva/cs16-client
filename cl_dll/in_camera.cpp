@@ -14,7 +14,7 @@
 #include "const.h"
 #include "camera.h"
 #include "in_defs.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 #ifdef _WIN32
 #include "port.h"
 #endif
@@ -362,14 +362,14 @@ void CAM_OutUp(void) { KeyUp( &cam_out ); }
 void CAM_ToThirdPerson(void)
 { 
 	vec3_t viewangles;
-	nexora_thirdperson_args_t nxArgs;
+	yoriva_thirdperson_args_t yrArgs;
 
-	nxArgs.allow = 0;
+	yrArgs.allow = 0;
 
-	NXPluginLoader_Dispatch( NEXORA_HOOK_THIRDPERSON, &nxArgs );
+	YRPluginLoader_Dispatch( YORIVA_HOOK_THIRDPERSON, &yrArgs );
 
 #if !defined( _DEBUG )
-	if ( !nxArgs.allow && gEngfuncs.GetMaxClients() > 1 )
+	if ( !yrArgs.allow && gEngfuncs.GetMaxClients() > 1 )
 	{
 		// no thirdperson in multiplayer.
 		return;

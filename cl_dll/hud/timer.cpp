@@ -28,7 +28,7 @@ version.
 
 #include "stdio.h"
 #include "stdlib.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 #include "math.h"
 
 #include "hud.h"
@@ -99,7 +99,7 @@ int CHudTimer::Draw( float fTime )
 	int x = (ScreenWidth - totalWidth) / 2;
 	int y = ScreenHeight - 1.5 * gHUD.m_iFontHeight;
 
-	NXClientHudElementPos( "timer", x, y );
+	YRClientHudElementPos( "timer", x, y );
 
 	SPR_Set(gHUD.GetSprite(m_HUD_timer), r, g, b);
 	SPR_DrawAdditive(0, x, y, &gHUD.GetSpriteRect(m_HUD_timer));
@@ -125,13 +125,13 @@ int CHudTimer::Draw( float fTime )
 int CHudTimer::MsgFunc_RoundTime(const char *pszName, int iSize, void *pbuf)
 {
 	{
-		nexora_netmsg_args_t nxArgs;
+		yoriva_netmsg_args_t yrArgs;
 
-		nxArgs.name = pszName;
-		nxArgs.size = iSize;
-		nxArgs.buf = pbuf;
+		yrArgs.name = pszName;
+		yrArgs.size = iSize;
+		yrArgs.buf = pbuf;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_NETMSG, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_NETMSG, &yrArgs );
 	}
 
 	BufferReader reader( pszName, pbuf, iSize );

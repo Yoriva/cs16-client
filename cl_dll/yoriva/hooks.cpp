@@ -4,19 +4,19 @@
 
 extern "C" {
 
-struct nx_hook_entry_s
+struct yr_hook_entry_s
 {
-	nexora_hook_fn fn;
+	yoriva_hook_fn fn;
 	void *user_data;
 	int owner;
 };
 
-static std::vector<nx_hook_entry_s> s_hooks[NEXORA_HOOK_COUNT];
+static std::vector<yr_hook_entry_s> s_hooks[YORIVA_HOOK_COUNT];
 static std::mutex s_hook_mutex;
 
-void NX_RegisterHook( int hook_id, nexora_hook_fn fn, void *user_data, int owner )
+void YR_RegisterHook( int hook_id, yoriva_hook_fn fn, void *user_data, int owner )
 {
-	if ( !fn || hook_id < 0 || hook_id >= NEXORA_HOOK_COUNT )
+	if ( !fn || hook_id < 0 || hook_id >= YORIVA_HOOK_COUNT )
 		return;
 
 	std::lock_guard<std::mutex> lock( s_hook_mutex );
@@ -30,9 +30,9 @@ void NX_RegisterHook( int hook_id, nexora_hook_fn fn, void *user_data, int owner
 	s_hooks[hook_id].push_back( { fn, user_data, owner } );
 }
 
-void NX_UnregisterHook( int hook_id, nexora_hook_fn fn, void *user_data, int owner )
+void YR_UnregisterHook( int hook_id, yoriva_hook_fn fn, void *user_data, int owner )
 {
-	if ( !fn || hook_id < 0 || hook_id >= NEXORA_HOOK_COUNT )
+	if ( !fn || hook_id < 0 || hook_id >= YORIVA_HOOK_COUNT )
 		return;
 
 	std::lock_guard<std::mutex> lock( s_hook_mutex );
@@ -47,12 +47,12 @@ void NX_UnregisterHook( int hook_id, nexora_hook_fn fn, void *user_data, int own
 	}
 }
 
-int NX_CountHooksForOwner( int owner )
+int YR_CountHooksForOwner( int owner )
 {
 	std::lock_guard<std::mutex> lock( s_hook_mutex );
 	int count = 0;
 
-	for ( int id = 0; id < NEXORA_HOOK_COUNT; id++ )
+	for ( int id = 0; id < YORIVA_HOOK_COUNT; id++ )
 	{
 		for ( const auto &entry : s_hooks[id] )
 		{
@@ -64,12 +64,12 @@ int NX_CountHooksForOwner( int owner )
 	return count;
 }
 
-void NXPluginLoader_Dispatch( int hook_id, void *args )
+void YRPluginLoader_Dispatch( int hook_id, void *args )
 {
-	if ( hook_id < 0 || hook_id >= NEXORA_HOOK_COUNT )
+	if ( hook_id < 0 || hook_id >= YORIVA_HOOK_COUNT )
 		return;
 
-	std::vector<nx_hook_entry_s> snapshot;
+	std::vector<yr_hook_entry_s> snapshot;
 
 	{
 		std::lock_guard<std::mutex> lock( s_hook_mutex );
@@ -78,7 +78,7 @@ void NXPluginLoader_Dispatch( int hook_id, void *args )
 
 	for ( const auto &entry : snapshot )
 	{
-		if ( entry.owner >= 0 && NXPluginLoader_IsPluginPaused( entry.owner ) )
+		if ( entry.owner >= 0 && YRPluginLoader_IsPluginPaused( entry.owner ) )
 			continue;
 
 		entry.fn( args, entry.user_data );

@@ -29,7 +29,7 @@
 
 #include "demo.h"
 #include "demo_api.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 #include "vgui_parser.h"
 #include "environment.h"
 
@@ -693,17 +693,17 @@ void CHud::AddHudElem(CHudBase *phudelem)
 }
 
 
-void NXClientHudElementPos( const char *element_name, int &x, int &y )
+void YRClientHudElementPos( const char *element_name, int &x, int &y )
 {
-	nexora_hud_element_pos_args_t nxArgs;
+	yoriva_hud_element_pos_args_t yrArgs;
 
-	nxArgs.name = element_name;
-	nxArgs.x = x;
-	nxArgs.y = y;
+	yrArgs.name = element_name;
+	yrArgs.x = x;
+	yrArgs.y = y;
 
-	NXPluginLoader_Dispatch( NEXORA_HOOK_HUD_ELEMENT_POS, &nxArgs );
+	YRPluginLoader_Dispatch( YORIVA_HOOK_HUD_ELEMENT_POS, &yrArgs );
 
-	x = nxArgs.x;
-	y = nxArgs.y;
+	x = yrArgs.x;
+	y = yrArgs.y;
 }
 

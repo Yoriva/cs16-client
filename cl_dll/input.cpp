@@ -13,7 +13,7 @@
 // rights reserved.
 #include "hud.h"
 #include "cl_util.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 #include "camera.h"
 #include "kbutton.h"
 #include "cvardef.h"
@@ -764,13 +764,13 @@ void DLLEXPORT CL_CreateMove ( float frametime, struct usercmd_s *cmd, int activ
 	}
 
 	{
-		nexora_create_move_args_t args;
+		yoriva_create_move_args_t args;
 
 		args.frametime = frametime;
 		args.cmd = cmd;
 		args.active = active;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_CREATE_MOVE, &args );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_CREATE_MOVE, &args );
 	}
 }
 

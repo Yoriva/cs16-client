@@ -34,7 +34,7 @@
 #include "draw_util.h"
 #include "triangleapi.h"
 #include "weapontype.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 
 #ifndef M_PI
 #define M_PI		3.14159265358979323846	// matches value in gcc v2 math.h
@@ -1048,7 +1048,7 @@ void CHudAmmo::UserCmd_Rebuy()
 int CHudAmmo::Draw(float flTime)
 {
 	{
-		nexora_ammo_args_t nxArgs;
+		yoriva_ammo_args_t yrArgs;
 
 		if ( m_pWeapon )
 		{
@@ -1057,18 +1057,18 @@ int CHudAmmo::Draw(float flTime)
 			if ( name && !strncmp( name, "weapon_", 7 ) )
 				name += 7;
 
-			nxArgs.clip = m_pWeapon->iClip;
-			nxArgs.reserve = m_pWeapon->iAmmoType > 0 ? gWR.CountAmmo( m_pWeapon->iAmmoType ) : -1;
-			nxArgs.weapon_name = name ? name : "";
+			yrArgs.clip = m_pWeapon->iClip;
+			yrArgs.reserve = m_pWeapon->iAmmoType > 0 ? gWR.CountAmmo( m_pWeapon->iAmmoType ) : -1;
+			yrArgs.weapon_name = name ? name : "";
 		}
 		else
 		{
-			nxArgs.clip = -1;
-			nxArgs.reserve = -1;
-			nxArgs.weapon_name = "";
+			yrArgs.clip = -1;
+			yrArgs.reserve = -1;
+			yrArgs.weapon_name = "";
 		}
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_AMMO_INFO, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_AMMO_INFO, &yrArgs );
 	}
 
 	int a, x, y, r, g, b;
@@ -1129,12 +1129,12 @@ int CHudAmmo::Draw(float flTime)
 
 	// Does this weapon have a clip?
 	y = ScreenHeight - gHUD.m_iFontHeight - gHUD.m_iFontHeight/2;
-	int nxHudAmmoX = ScreenWidth;
+	int yrHudAmmoX = ScreenWidth;
 
 	{
-		int nxHudAmmoY = y;
-		NXClientHudElementPos( "ammo", nxHudAmmoX, nxHudAmmoY );
-		y = nxHudAmmoY;
+		int yrHudAmmoY = y;
+		YRClientHudElementPos( "ammo", yrHudAmmoX, yrHudAmmoY );
+		y = yrHudAmmoY;
 	}
 
 	// Does weapon have any ammo at all?
@@ -1146,7 +1146,7 @@ int CHudAmmo::Draw(float flTime)
 		{
 			// room for the number and the '|' and the current ammo
 			
-			x = ( nxHudAmmoX != ScreenWidth ) ? nxHudAmmoX : ScreenWidth - (8 * AmmoWidth) - iIconWidth;
+			x = ( yrHudAmmoX != ScreenWidth ) ? yrHudAmmoX : ScreenWidth - (8 * AmmoWidth) - iIconWidth;
 			x = DrawUtils::DrawHudNumber(x, y, iFlags | DHN_3DIGITS, pw->iClip, r, g, b);
 
 			int iBarWidth =  AmmoWidth/10;
@@ -1169,7 +1169,7 @@ int CHudAmmo::Draw(float flTime)
 		else
 		{
 			// SPR_Draw a bullets only line
-			x = ( nxHudAmmoX != ScreenWidth ) ? nxHudAmmoX : ScreenWidth - 4 * AmmoWidth - iIconWidth;
+			x = ( yrHudAmmoX != ScreenWidth ) ? yrHudAmmoX : ScreenWidth - 4 * AmmoWidth - iIconWidth;
 			x = DrawUtils::DrawHudNumber(x, y, iFlags | DHN_3DIGITS, gWR.CountAmmo(pw->iAmmoType), r, g, b);
 		}
 
@@ -1188,7 +1188,7 @@ int CHudAmmo::Draw(float flTime)
 		if ((pw->iAmmo2Type != 0) && (gWR.CountAmmo(pw->iAmmo2Type) > 0))
 		{
 			y -= gHUD.m_iFontHeight + gHUD.m_iFontHeight/4;
-			x = ( nxHudAmmoX != ScreenWidth ) ? nxHudAmmoX : ScreenWidth - 4 * AmmoWidth - iIconWidth;
+			x = ( yrHudAmmoX != ScreenWidth ) ? yrHudAmmoX : ScreenWidth - 4 * AmmoWidth - iIconWidth;
 			x = DrawUtils::DrawHudNumber(x, y, iFlags|DHN_3DIGITS, gWR.CountAmmo(pw->iAmmo2Type), r, g, b);
 
 			// Draw the ammo Icon

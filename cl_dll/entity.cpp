@@ -14,7 +14,7 @@
 #include "pmtrace.h"
 #include "pm_shared.h"
 #include "cl_util.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 #include "const.h"
 #include "entity_types.h"
 #include "studio_event.h" // def. of mstudioevent_t
@@ -40,16 +40,16 @@ HUD_AddEntity
 */
 int DLLEXPORT HUD_AddEntity( int type, struct cl_entity_s *ent, const char *modelname )
 {
-	nexora_add_entity_args_t nexoraArgs;
+	yoriva_add_entity_args_t yorivaArgs;
 
-	nexoraArgs.type = type;
-	nexoraArgs.entity = ent;
-	nexoraArgs.modelname = modelname;
-	nexoraArgs.allow = 1;
+	yorivaArgs.type = type;
+	yorivaArgs.entity = ent;
+	yorivaArgs.modelname = modelname;
+	yorivaArgs.allow = 1;
 
-	NXPluginLoader_Dispatch( NEXORA_HOOK_ADD_ENTITY, &nexoraArgs );
+	YRPluginLoader_Dispatch( YORIVA_HOOK_ADD_ENTITY, &yorivaArgs );
 
-	if ( !nexoraArgs.allow )
+	if ( !yorivaArgs.allow )
 		return 0;
 
 	switch ( type )
@@ -120,11 +120,11 @@ playerstate structure
 */
 void DLLEXPORT HUD_ProcessPlayerState( struct entity_state_s *dst, const struct entity_state_s *src )
 {
-	nexora_process_player_state_args_t args;
+	yoriva_process_player_state_args_t args;
 
 	args.dst = dst;
 	args.src = src;
-	NXPluginLoader_Dispatch( NEXORA_HOOK_PROCESS_PLAYER_STATE, &args );
+	YRPluginLoader_Dispatch( YORIVA_HOOK_PROCESS_PLAYER_STATE, &args );
 
 	// Copy in network data
 	VectorCopy( src->origin, dst->origin );
@@ -245,7 +245,7 @@ Gives us a chance to add additional entities to the render this frame
 */
 void DLLEXPORT HUD_CreateEntities( void )
 {
-	NXPluginLoader_Dispatch( NEXORA_HOOK_CREATE_ENTITIES, NULL );
+	YRPluginLoader_Dispatch( YORIVA_HOOK_CREATE_ENTITIES, NULL );
 
 	// Add in any game specific objects
 

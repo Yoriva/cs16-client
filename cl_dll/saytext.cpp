@@ -30,7 +30,7 @@
 #include "com_weapons.h"
 #include "utlstring.h"
 #include "strl.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 //#include "vgui_TeamFortressViewport.h"
 
 extern float *GetClientColor( int clientIndex );
@@ -357,16 +357,16 @@ void CHudSayText :: SayTextPrint( const char *pszBuf, int iBufSize, int clientIn
 	bool consolePrint = m_HUD_saytext_console->value && pszBuf && *pszBuf;
 
 	{
-		nexora_chat_args_t nxArgs;
+		yoriva_chat_args_t yrArgs;
 
-		nxArgs.text = pszBuf;
-		nxArgs.client_index = clientIndex;
-		nxArgs.time = gHUD.m_flTime;
-		nxArgs.allow = 1;
+		yrArgs.text = pszBuf;
+		yrArgs.client_index = clientIndex;
+		yrArgs.time = gHUD.m_flTime;
+		yrArgs.allow = 1;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_CHAT, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_CHAT, &yrArgs );
 
-		if ( !nxArgs.allow )
+		if ( !yrArgs.allow )
 		{
 			if ( consolePrint )
 			{

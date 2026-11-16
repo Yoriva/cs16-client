@@ -28,7 +28,7 @@
 #include <string.h>
 #include "strl.h"
 #include "eventscripts.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 
 #include "draw_util.h"
 
@@ -127,13 +127,13 @@ int CHudHealth::VidInit(void)
 int CHudHealth:: MsgFunc_Health(const char *pszName,  int iSize, void *pbuf )
 {
 	{
-		nexora_netmsg_args_t nxArgs;
+		yoriva_netmsg_args_t yrArgs;
 
-		nxArgs.name = pszName;
-		nxArgs.size = iSize;
-		nxArgs.buf = pbuf;
+		yrArgs.name = pszName;
+		yrArgs.size = iSize;
+		yrArgs.buf = pbuf;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_NETMSG, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_NETMSG, &yrArgs );
 	}
 
 	// TODO: update local health data
@@ -186,13 +186,13 @@ int CHudHealth:: MsgFunc_Damage(const char *pszName,  int iSize, void *pbuf )
 int CHudHealth::MsgFunc_ScoreAttrib(const char *pszName,  int iSize, void *pbuf )
 {
 	{
-		nexora_netmsg_args_t nxArgs;
+		yoriva_netmsg_args_t yrArgs;
 
-		nxArgs.name = pszName;
-		nxArgs.size = iSize;
-		nxArgs.buf = pbuf;
+		yrArgs.name = pszName;
+		yrArgs.size = iSize;
+		yrArgs.buf = pbuf;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_NETMSG, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_NETMSG, &yrArgs );
 	}
 
 	BufferReader reader( pszName, pbuf, iSize );
@@ -297,7 +297,7 @@ void CHudHealth::DrawHealthBar( float flTime )
 		y = ScreenHeight - gHUD.m_iFontHeight - gHUD.m_iFontHeight / 2;
 		x = CrossWidth /2;
 
-		NXClientHudElementPos( "health", x, y );
+		YRClientHudElementPos( "health", x, y );
 
 		const int healthBaseX = x;
 
@@ -555,13 +555,13 @@ bool CL_IsDead()
 int CHudHealth::MsgFunc_HealthInfo( const char *pszName, int iSize, void *buf )
 {
 	{
-		nexora_netmsg_args_t nxArgs;
+		yoriva_netmsg_args_t yrArgs;
 
-		nxArgs.name = pszName;
-		nxArgs.size = iSize;
-		nxArgs.buf = buf;
+		yrArgs.name = pszName;
+		yrArgs.size = iSize;
+		yrArgs.buf = buf;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_NETMSG, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_NETMSG, &yrArgs );
 	}
 
 	BufferReader reader( pszName, buf, iSize );
@@ -578,13 +578,13 @@ int CHudHealth::MsgFunc_HealthInfo( const char *pszName, int iSize, void *buf )
 int CHudHealth::MsgFunc_Account( const char *pszName, int iSize, void *buf )
 {
 	{
-		nexora_netmsg_args_t nxArgs;
+		yoriva_netmsg_args_t yrArgs;
 
-		nxArgs.name = pszName;
-		nxArgs.size = iSize;
-		nxArgs.buf = buf;
+		yrArgs.name = pszName;
+		yrArgs.size = iSize;
+		yrArgs.buf = buf;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_NETMSG, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_NETMSG, &yrArgs );
 	}
 
 	BufferReader reader( pszName, buf, iSize );

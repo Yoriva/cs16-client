@@ -22,7 +22,7 @@
 #include "parsemsg.h"
 #include "cl_util.h"
 #include "draw_util.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 
 int CHudBattery::Init( void )
 {
@@ -55,13 +55,13 @@ int CHudBattery::VidInit( void )
 int CHudBattery:: MsgFunc_Battery(const char *pszName, int iSize, void *pbuf )
 {
 	{
-		nexora_netmsg_args_t nxArgs;
+		yoriva_netmsg_args_t yrArgs;
 
-		nxArgs.name = pszName;
-		nxArgs.size = iSize;
-		nxArgs.buf = pbuf;
+		yrArgs.name = pszName;
+		yrArgs.size = iSize;
+		yrArgs.buf = pbuf;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_NETMSG, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_NETMSG, &yrArgs );
 	}
 
 	BufferReader reader( pszName, pbuf, iSize );
@@ -124,7 +124,7 @@ int CHudBattery::Draw( float flTime )
 	y = ScreenHeight - gHUD.m_iFontHeight - gHUD.m_iFontHeight / 2;
 	x = ScreenWidth / 5;
 
-	NXClientHudElementPos( "battery", x, y );
+	YRClientHudElementPos( "battery", x, y );
 
 	// make sure we have the right sprite handles
 	SPR_Set( m_hFull[m_enArmorType].spr, r, g, b );

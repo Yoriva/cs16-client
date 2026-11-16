@@ -23,7 +23,7 @@
 #include <stdio.h>
 #include "draw_util.h"
 #include "strl.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 
 float color[3];
 
@@ -329,24 +329,24 @@ int CHudDeathNotice :: MsgFunc_DeathMsg( const char *pszName, int iSize, void *p
 		if ( victim >= 1 && victim <= MAX_PLAYERS )
 			victim_this_player = g_PlayerInfoList[ victim ].thisplayer != 0;
 
-		nexora_deathmsg_args_t nxArgs;
+		yoriva_deathmsg_args_t yrArgs;
 
-		nxArgs.killer = killer;
-		nxArgs.victim = victim;
-		nxArgs.headshot = headshot;
-		nxArgs.weapon = killedwith;
-		nxArgs.killer_name = killer_name ? killer_name : "";
-		nxArgs.victim_name = victim_name ? victim_name : "";
-		nxArgs.killer_team = killer >= 1 && killer <= MAX_PLAYERS ? g_PlayerExtraInfo[ killer ].teamnumber : -1;
-		nxArgs.victim_team = victim >= 1 && victim <= MAX_PLAYERS ? g_PlayerExtraInfo[ victim ].teamnumber : -1;
-		nxArgs.killer_is_local = ( killer_this_player || g_iUser2 == killer ) ? 1 : 0;
-		nxArgs.victim_is_local = victim_this_player ? 1 : 0;
-		nxArgs.is_suicide = rgDeathNoticeList[i].bSuicide ? 1 : 0;
-		nxArgs.is_teamkill = rgDeathNoticeList[i].bTeamKill ? 1 : 0;
-		nxArgs.is_nonplayer_kill = rgDeathNoticeList[i].bNonPlayerKill ? 1 : 0;
-		nxArgs.time = gHUD.m_flTime;
+		yrArgs.killer = killer;
+		yrArgs.victim = victim;
+		yrArgs.headshot = headshot;
+		yrArgs.weapon = killedwith;
+		yrArgs.killer_name = killer_name ? killer_name : "";
+		yrArgs.victim_name = victim_name ? victim_name : "";
+		yrArgs.killer_team = killer >= 1 && killer <= MAX_PLAYERS ? g_PlayerExtraInfo[ killer ].teamnumber : -1;
+		yrArgs.victim_team = victim >= 1 && victim <= MAX_PLAYERS ? g_PlayerExtraInfo[ victim ].teamnumber : -1;
+		yrArgs.killer_is_local = ( killer_this_player || g_iUser2 == killer ) ? 1 : 0;
+		yrArgs.victim_is_local = victim_this_player ? 1 : 0;
+		yrArgs.is_suicide = rgDeathNoticeList[i].bSuicide ? 1 : 0;
+		yrArgs.is_teamkill = rgDeathNoticeList[i].bTeamKill ? 1 : 0;
+		yrArgs.is_nonplayer_kill = rgDeathNoticeList[i].bNonPlayerKill ? 1 : 0;
+		yrArgs.time = gHUD.m_flTime;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_DEATHMSG, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_DEATHMSG, &yrArgs );
 	}
 
 	return 1;

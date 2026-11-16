@@ -292,7 +292,7 @@ int CHudRadar::Draw(float flTime)
 	s_radarOffsetX = 0;
 	s_radarOffsetY = 0;
 
-	NXClientHudElementPos( "radar", s_radarOffsetX, s_radarOffsetY );
+	YRClientHudElementPos( "radar", s_radarOffsetX, s_radarOffsetY );
 
 	int iTeamNumber = g_PlayerExtraInfo[ gHUD.m_Scoreboard.m_iPlayerNum ].teamnumber;
 	int r, g, b;

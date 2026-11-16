@@ -87,7 +87,7 @@ int CHudMoney::Draw(float flTime)
 	int x = ScreenWidth - iDollarWidth * 7;
 	int y = MONEY_YPOS;
 
-	NXClientHudElementPos( "money", x, y );
+	YRClientHudElementPos( "money", x, y );
 
 	if( m_iBlinkAmt )
 	{

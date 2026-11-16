@@ -4,7 +4,7 @@
 #include "kbutton.h"
 #include "keydefs.h"
 #include "input.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 
 #define	PITCH	0
 #define	YAW		1
@@ -261,7 +261,7 @@ void DLLEXPORT IN_Accumulate ( void )
 
 void IN_Commands ( void )
 {
-	NXPluginLoader_Dispatch( NEXORA_HOOK_IN_COMMANDS, NULL );
+	YRPluginLoader_Dispatch( YORIVA_HOOK_IN_COMMANDS, NULL );
 }
 
 void IN_Shutdown ( void )

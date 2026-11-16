@@ -28,7 +28,7 @@
 #include "vgui_parser.h"
 #include "ctype.h"
 #include "draw_util.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 
 int CHudTextMessage::Init(void)
 {
@@ -220,14 +220,14 @@ int CHudTextMessage::MsgFunc_TextMsg( const char *pszName, int iSize, void *pbuf
 
 		ConvertCRtoNL( psz );
 
-		nexora_centerprint_args_t nxArgs;
+		yoriva_centerprint_args_t yrArgs;
 
-		nxArgs.text = psz;
-		nxArgs.allow = 1;
+		yrArgs.text = psz;
+		yrArgs.allow = 1;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_CENTERPRINT, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_CENTERPRINT, &yrArgs );
 
-		if ( nxArgs.allow )
+		if ( yrArgs.allow )
 		{
 			int len = DrawUtils::ConsoleStringLen( psz );
 

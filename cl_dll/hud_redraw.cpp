@@ -23,7 +23,7 @@
 #include <string.h>
 
 #include "draw_util.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 
 #define MAX_LOGO_FRAMES 56
 
@@ -37,7 +37,7 @@ int grgLogoFrame[MAX_LOGO_FRAMES] =
 
 extern int g_iVisibleMouse;
 
-static const char *NXHudElementName( CHudBase *element )
+static const char *YRHudElementName( CHudBase *element )
 {
 	if ( !element )
 		return "unknown";
@@ -148,15 +148,15 @@ int CHud :: Redraw( float flTime, int intermission )
 						continue; // skip no-intermission during intermission
 
 					{
-						nexora_hud_element_args_t nxArgs;
+						yoriva_hud_element_args_t yrArgs;
 
-						nxArgs.element = pList->p;
-						nxArgs.name = NXHudElementName( pList->p );
-						nxArgs.allow = 1;
+						yrArgs.element = pList->p;
+						yrArgs.name = YRHudElementName( pList->p );
+						yrArgs.allow = 1;
 
-						NXPluginLoader_Dispatch( NEXORA_HOOK_HUD_ELEMENT_DRAW, &nxArgs );
+						YRPluginLoader_Dispatch( YORIVA_HOOK_HUD_ELEMENT_DRAW, &yrArgs );
 
-						if ( !nxArgs.allow )
+						if ( !yrArgs.allow )
 							continue;
 					}
 

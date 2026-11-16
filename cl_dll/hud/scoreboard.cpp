@@ -29,7 +29,7 @@
 #include "draw_util.h"
 #include "vgui_parser.h"
 #include "eventscripts.h"
-#include "nexora/loader.h"
+#include "yoriva/loader.h"
 
 hud_player_info_t   g_PlayerInfoList[MAX_PLAYERS+1]; // player info from the engine
 extra_player_info_t	g_PlayerExtraInfo[MAX_PLAYERS+1]; // additional player info sent directly to the client dll
@@ -566,13 +566,13 @@ int CHudScoreboard :: MsgFunc_ScoreInfo( const char *pszName, int iSize, void *p
 	m_iFlags |= HUD_DRAW;
 
 	{
-		nexora_netmsg_args_t nxArgs;
+		yoriva_netmsg_args_t yrArgs;
 
-		nxArgs.name = pszName;
-		nxArgs.size = iSize;
-		nxArgs.buf = pbuf;
+		yrArgs.name = pszName;
+		yrArgs.size = iSize;
+		yrArgs.buf = pbuf;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_NETMSG, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_NETMSG, &yrArgs );
 	}
 
 	BufferReader reader( pszName, pbuf, iSize );
@@ -601,13 +601,13 @@ int CHudScoreboard :: MsgFunc_ScoreInfo( const char *pszName, int iSize, void *p
 int CHudScoreboard :: MsgFunc_TeamInfo( const char *pszName, int iSize, void *pbuf )
 {
 	{
-		nexora_netmsg_args_t nxArgs;
+		yoriva_netmsg_args_t yrArgs;
 
-		nxArgs.name = pszName;
-		nxArgs.size = iSize;
-		nxArgs.buf = pbuf;
+		yrArgs.name = pszName;
+		yrArgs.size = iSize;
+		yrArgs.buf = pbuf;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_NETMSG, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_NETMSG, &yrArgs );
 	}
 
 	BufferReader reader( pszName, pbuf, iSize );
@@ -712,13 +712,13 @@ int CHudScoreboard :: MsgFunc_TeamInfo( const char *pszName, int iSize, void *pb
 int CHudScoreboard :: MsgFunc_TeamScore( const char *pszName, int iSize, void *pbuf )
 {
 	{
-		nexora_netmsg_args_t nxArgs;
+		yoriva_netmsg_args_t yrArgs;
 
-		nxArgs.name = pszName;
-		nxArgs.size = iSize;
-		nxArgs.buf = pbuf;
+		yrArgs.name = pszName;
+		yrArgs.size = iSize;
+		yrArgs.buf = pbuf;
 
-		NXPluginLoader_Dispatch( NEXORA_HOOK_NETMSG, &nxArgs );
+		YRPluginLoader_Dispatch( YORIVA_HOOK_NETMSG, &yrArgs );
 	}
 
 	BufferReader reader( pszName, pbuf, iSize );
@@ -765,20 +765,20 @@ void CHudScoreboard :: UserCmd_ShowScores( void )
 	m_bForceDraw = false;
 	m_bShowscoresHeld = true;
 
-	nexora_scoreboard_args_t nxArgs;
+	yoriva_scoreboard_args_t yrArgs;
 
-	nxArgs.visible = 1;
-	NXPluginLoader_Dispatch( NEXORA_HOOK_SCOREBOARD_TOGGLE, &nxArgs );
+	yrArgs.visible = 1;
+	YRPluginLoader_Dispatch( YORIVA_HOOK_SCOREBOARD_TOGGLE, &yrArgs );
 }
 
 void CHudScoreboard :: UserCmd_HideScores( void )
 {
 	m_bForceDraw = m_bShowscoresHeld = false;
 
-	nexora_scoreboard_args_t nxArgs;
+	yoriva_scoreboard_args_t yrArgs;
 
-	nxArgs.visible = 0;
-	NXPluginLoader_Dispatch( NEXORA_HOOK_SCOREBOARD_TOGGLE, &nxArgs );
+	yrArgs.visible = 0;
+	YRPluginLoader_Dispatch( YORIVA_HOOK_SCOREBOARD_TOGGLE, &yrArgs );
 }
 
 
